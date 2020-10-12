@@ -1,0 +1,22 @@
+.loginLogoContainer{
+    z-index: 999;
+    position: absolute;
+    border: 1px solid lightgray;
+    border-radius: 50%;
+    transform: translate(-50%);
+    background-color: skyblue;
+}
+.loginLogoSubContainer{
+    border-radius: 50%;
+    padding: 10px;
+}
+.loginLogo{
+    height: auto;
+    margin-left: 50%;
+    transform: translate(-50%);
+}
+
+/*for itemList*/
+.itemListMainContainer{
+    --ion-background-color: white;
+}
