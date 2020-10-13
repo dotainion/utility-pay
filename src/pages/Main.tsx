@@ -10,7 +10,7 @@ const Widget = new Widgets();
 const Page: React.FC = () => {
   const { name } = useParams<{name:string}>()
   return (
-    <IonPage class="systemBackgrund">
+    <IonPage className="systemBackgrund">
       <Widget.Header/>
     
       <IonContent>

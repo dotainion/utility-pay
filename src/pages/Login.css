@@ -32,12 +32,14 @@
     text-align: center;
 }
 .loginTitle{
-    color: blue;
+    color: rgb(13, 117, 221);
     font-size: 25px;
+    font-weight: bolder;
     text-decoration: underline;
 }
 .loginSubTitle{
-    color: black;
+    font-weight: bold;
+    color: rgb(6, 76, 146);
     font-size: 20px;
     margin-top: 8px;
     margin-bottom: 10px;

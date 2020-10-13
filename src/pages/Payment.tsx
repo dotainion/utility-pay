@@ -1,4 +1,4 @@
-import { IonButtons, IonCard, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButtons, IonCard, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
 import React, { useState } from 'react';
 import './Payment.css';
 import './Main.css';
@@ -16,7 +16,7 @@ const Payment = (data:any) => {
     var HIDDEN = true;
     if (data.onOpen === "Payment") HIDDEN = false;
     const asterisks = <span style={{color:"red"}}>*</span>;
-    const BANKS_LIST = [1,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6,2,3,4,5,6];
+    const BANKS_LIST = [0,1,2,3,4,5,6,7,8,9,10];
     const SERVICE_TYPE = ["residential","commercial","other"];
 
     const emailValidate = new Creds().check;
@@ -31,30 +31,8 @@ const Payment = (data:any) => {
     }
     return (
         <IonList hidden={HIDDEN}>
-            <Widget.ItemList isOpen={open.banks} list={BANKS_LIST} dismiss={()=>{
-            setOpen({banks:false,type:false})}} onClick={(value:any)=>{
-                setCustomer({
-                    bank:value,type:customer.type,acount:customer.acount,
-                    email:customer.email,amount:customer.amount
-                });
-            }} top="150px"/>
-            <Widget.ItemList isOpen={open.type} list={SERVICE_TYPE} dismiss={()=>{
-            setOpen({banks:false,type:false})}} onClick={(value:any)=>{
-                setCustomer({
-                    bank:customer.bank,type:value,acount:customer.acount,
-                    email:customer.email,amount:customer.amount
-                });
-            }} top="205px" height="150px"/>
 
-            <div style={{zIndex:1155,position:"absolute",right:0,
-                marginRight:"130px",marginTop:"200px"}}>
-                <div>
-                    <IonLabel color="primary" style={{fontSize:"35px",fontWeight:"bolder"}}>NAWASA</IonLabel>
-                </div>
-                <div>
-                    <p style={{fontSize:"20px"}}>{"National Water & Sewerage Authority"}</p>
-                </div>
-            </div>
+            <Widget.utilitySideInfo left="-50%"/>
 
             <IonCard class="mainContainer">
                 <IonHeader class="paymentHeader" className="systemHeaderbackground">
@@ -70,43 +48,69 @@ const Payment = (data:any) => {
                     <IonLabel>Amount Due ${0.00}</IonLabel>
                 </IonItem>
 
-                <IonItem className="paymentLableStyle" class="paymentItems" lines="none" onClick={()=>{
-                        setOpen({banks:true,type:false});
-                    }}>
-                    <IonLabel>Bank Name{asterisks}<span className="paymentClickSpan">{customer.bank}</span></IonLabel>
-                </IonItem>
-                <IonItem className="paymentLableStyle" class="paymentItems" lines="none" onClick={()=>{
-                        setOpen({banks:false,type:true});
-                    }}>
-                    <IonLabel>Service Type{asterisks}<span className="paymentClickSpan">{customer.type}</span></IonLabel>
-                </IonItem>
-                <IonItem className="paymentLableStyle" class="paymentItems" lines="none">
-                    <IonLabel position="floating">Utility Account Number{asterisks}</IonLabel>
-                    <IonInput value={customer.acount} onIonChange={(e)=>{
-                        if (e.detail.value) setCustomer({
-                            bank:customer.bank,type:customer.type,acount:e.detail.value,
-                            email:customer.email,amount:customer.amount
-                        });
-                    }}/>
-                </IonItem>
-                <IonItem className="paymentLableStyle" class="paymentItems" lines="none">
-                    <IonLabel position="floating">example@gamil.com{asterisks}</IonLabel>
-                    <IonInput value={customer.email} onIonChange={(e)=>{
-                        if (e.detail.value) setCustomer({
-                            bank:customer.bank,type:customer.type,acount:customer.acount,
-                            email:e.detail.value,amount:customer.amount
-                        });
-                    }}/>
-                </IonItem>
-                <IonItem className="paymentLableStyle" class="paymentItems" lines="none">
-                    <IonLabel position="floating">Amount Paying{asterisks}</IonLabel>
-                    <IonInput value={customer.amount} onIonChange={(e)=>{
-                        if (e.detail.value) setCustomer({
-                            bank:customer.bank,type:customer.type,acount:customer.acount,
-                            email:customer.email,amount:e.detail.value
-                        });
-                    }}/>
-                </IonItem>
+                <IonList class="mainSubContainer">
+                    <IonCard>
+                        <IonItem className="paymentLableStyle" class="paymentItems" lines="none">
+                            <span>Bank Name</span>
+                            <IonSelect slot="end" placeholder="Choose your bank name" interface="popover" onIonChange={(e)=>{
+                                setCustomer({
+                                    bank:e.detail.value,type:customer.type,acount:customer.acount,
+                                    email:customer.email,amount:customer.amount
+                                });}} value={customer.bank}>
+                                {BANKS_LIST.map((item:any,key:number)=>{return(
+                                    <IonSelectOption>{item}</IonSelectOption>
+                                )})}
+                            </IonSelect>
+                        </IonItem>
+                    </IonCard>
+                    <IonCard>
+                        <IonItem className="paymentLableStyle" class="paymentItems" lines="none">
+                            <span>Service Type</span>
+                            <IonSelect slot="end" placeholder="Choose your service type" interface="popover" onIonChange={(e)=>{
+                                setCustomer({
+                                    bank:customer.bank,type:e.detail.value,acount:customer.acount,
+                                    email:customer.email,amount:customer.amount
+                                });}} value={customer.type}>
+                                {SERVICE_TYPE.map((item:any,key:number)=>{return(
+                                    <IonSelectOption>{item}</IonSelectOption>
+                                )})}
+                            </IonSelect>
+                        </IonItem>
+                    </IonCard>
+                    <IonCard>
+                        <IonItem className="paymentLableStyle" class="paymentItems" lines="none">
+                            <IonLabel position="floating">Utility Account Number{asterisks}</IonLabel>
+                            <IonInput value={customer.acount} onIonChange={(e)=>{
+                                if (e.detail.value) setCustomer({
+                                    bank:customer.bank,type:customer.type,acount:e.detail.value,
+                                    email:customer.email,amount:customer.amount
+                                });
+                            }}/>
+                        </IonItem>
+                    </IonCard>
+                    <IonCard>
+                        <IonItem className="paymentLableStyle" class="paymentItems" lines="none">
+                            <IonLabel position="floating">example@gamil.com{asterisks}</IonLabel>
+                            <IonInput value={customer.email} onIonChange={(e)=>{
+                                if (e.detail.value) setCustomer({
+                                    bank:customer.bank,type:customer.type,acount:customer.acount,
+                                    email:e.detail.value,amount:customer.amount
+                                });
+                            }}/>
+                        </IonItem>
+                    </IonCard>
+                    <IonCard>
+                        <IonItem className="paymentLableStyle" class="paymentItems" lines="none">
+                            <IonLabel position="floating">Amount Paying{asterisks}</IonLabel>
+                            <IonInput value={customer.amount} onIonChange={(e)=>{
+                                if (e.detail.value) setCustomer({
+                                    bank:customer.bank,type:customer.type,acount:customer.acount,
+                                    email:customer.email,amount:e.detail.value
+                                });
+                            }}/>
+                        </IonItem>
+                    </IonCard>
+                </IonList>
             </IonCard>
 
             <pay.checkOut

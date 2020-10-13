@@ -37,6 +37,8 @@ const Login: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             
+            <Widget.utilitySideInfo left="-20%"/>
+
             <IonContent>
                 <Widget.logo src={LOGO}/>
                 <IonList className="loginMainContainer" style={{width:tools.isMobil("95%","")}}>

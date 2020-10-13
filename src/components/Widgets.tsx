@@ -29,6 +29,7 @@ export class Widgets{
             marginTop:data.top,
             userSelect:"none",
             border:"1px solid lightgray",
+            marginLeft:data.left || "3%",
         }
         return (
             <IonCard className="itemListMainContainer" hidden={!data.isOpen} style={style}>
@@ -62,6 +63,22 @@ export class Widgets{
                     <IonImg class="loginLogo" src={data.src} style={logoStyle}/>
                 </IonCard>
             </IonCard>
+        )
+    }
+
+    utilitySideInfo(data:any){
+        const LEFT = data.left || "10%";
+        const TOP = data.top || "200px";
+        return(
+            <div style={{zIndex:1155,position:"absolute",right:0,
+                transform:"translate("+LEFT+")",marginTop:TOP}}>
+                <div>
+                    <IonLabel color="primary" style={{fontSize:"35px",fontWeight:"bolder"}}>NAWASA</IonLabel>
+                </div>
+                <div>
+                    <p style={{fontSize:"20px"}}>{"National Water & Sewerage Authority"}</p>
+                </div>
+            </div>
         )
     }
 }  
