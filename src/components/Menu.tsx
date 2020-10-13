@@ -1,5 +1,5 @@
-import {IonContent,IonIcon,IonItem,IonLabel,IonList,IonListHeader,IonMenu,IonMenuToggle,IonNote,} from '@ionic/react';
-import React from 'react';
+import {IonButton, IonContent,IonIcon,IonItem,IonLabel,IonList,IonListHeader,IonMenu,IonMenuToggle,IonNote,} from '@ionic/react';
+import React, { useState } from 'react';
 //import { useLocation } from 'react-router-dom';
 import { archiveOutline, archiveSharp, bookmarkOutline, cardOutline, cardSharp, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
 import './Menu.css';
@@ -60,13 +60,14 @@ const appPages: AppPage[] = [
 const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
 const Menu: React.FC = () => {
+  const [hideMenu, setHideMenu] = useState(true);
   //const location = useLocation();
 
   return (
-    <IonMenu contentId="menu" type="overlay" style={{width:tools.isMobil("","100px")}}>
+    <IonMenu hidden={hideMenu} contentId="menu" type="overlay" style={{width:tools.isMobil("","100px")}}>
       <IonContent>
         <IonList id="inbox-list">
-          <IonListHeader>Inbox</IonListHeader>
+          <IonListHeader>{tools.texts().APPNAME.replace("Payments","")}</IonListHeader>
           <IonNote>hi@ionicframework.com</IonNote>
           {appPages.map((appPage, index) => {
             return (
@@ -90,6 +91,8 @@ const Menu: React.FC = () => {
           ))}
         </IonList>
       </IonContent>
+      <IonButton hidden id="show-menu" onClick={()=>{setHideMenu(false)}}/>
+      <IonButton hidden id="hide-menu" onClick={()=>{setHideMenu(true)}}/>
     </IonMenu>
   );
 };

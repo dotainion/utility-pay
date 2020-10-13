@@ -1,24 +1,44 @@
-import { IonBackButton, IonButton, IonButtons, IonCard, IonContent, IonHeader, IonImg, IonItem, IonLabel, IonMenuButton, IonPopover, IonTitle, IonToggle, IonToolbar } from '@ionic/react';
+import { IonBackButton, IonButton, IonButtons, IonCard, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonLoading, IonMenuButton, IonPopover, IonTitle, IonToggle, IonToolbar } from '@ionic/react';
 import { database } from 'firebase';
-import React from 'react';
+import React, { useState } from 'react';
 import './Widgets.css';
 import '../pages/Main.css';
 import { useParams } from 'react-router';
+import tools from './Tools';
+import { ellipseSharp, ellipsisVerticalSharp } from 'ionicons/icons';
+import { Security } from './Security';
 
 export class Widgets{
     Header(){
         const { name } = useParams<{name:string}>();
+        const SECURE = new Security();
         return (
             <IonHeader className="systemHeaderbackground">
                 <IonToolbar>
-                    <IonButtons slot="start">
-                        <IonMenuButton />
+                    <IonButtons hidden={tools.compare(SECURE.isLogin(),true,false,true)} slot="start">
+                        <IonMenuButton/>
                     </IonButtons>
                     <IonTitle>{name}</IonTitle>
+                    <IonButtons style={{marginRight:"20px",fontSize:"25px"}} slot="end">
+                        <IonIcon icon={ellipsisVerticalSharp} />
+                    </IonButtons>
                 </IonToolbar>
             </IonHeader>
         );
     };
+
+    prospectHeader(){
+        return(
+            <IonHeader className="systemProspectHeader">
+                <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonMenuButton />
+                    </IonButtons>
+                    <IonTitle class="prospectHeaderTitle">{tools.texts().APPNAME}</IonTitle>
+                </IonToolbar>
+            </IonHeader>
+        )
+    }
     
     ItemList(data:any){
         const { name } = useParams<{name:string}>();
@@ -70,7 +90,7 @@ export class Widgets{
         const LEFT = data.left || "10%";
         const TOP = data.top || "200px";
         return(
-            <div style={{zIndex:1155,position:"absolute",right:0,
+            <div hidden={tools.isMobil(true,false)} style={{zIndex:1155,position:"absolute",right:0,width:"340px",
                 transform:"translate("+LEFT+")",marginTop:TOP}}>
                 <div>
                     <IonLabel color="primary" style={{fontSize:"35px",fontWeight:"bolder"}}>NAWASA</IonLabel>
@@ -79,6 +99,43 @@ export class Widgets{
                     <p style={{fontSize:"20px"}}>{"National Water & Sewerage Authority"}</p>
                 </div>
             </div>
+        )
+    }
+
+    loadSpinner(){
+        const [ showLoading, setShowLoading ] = useState(false);
+        return(
+            <>
+                <IonLoading
+                    cssClass='my-custom-class'
+                    isOpen={showLoading}
+                    onDidDismiss={() => setShowLoading(false)}
+                    message={'Please wait...'}
+                    //duration={5000}
+                    />
+                
+                <IonButton hidden id="start-loader" onClick={()=>{
+                    setShowLoading(true);
+                }}/>
+                <IonButton hidden id="stop-loader" onClick={()=>{
+                    setShowLoading(false);
+                }}/>
+            </>
+        )
+    }
+
+    passwordProgressBar(data:any){
+        var results:any = tools.passwordStrength(data.creds);
+        var percentageValue = ((100 / data.max) * parseFloat(results.value)).toString();
+        return(
+            <>
+                <div style={{width:"100%",height:"9px",marginTop:data.mTop,
+                        borderRadius:"25px",border:"1px solid gray"}}>
+                    <div style={{backgroundColor:results.color,width:percentageValue+"%",
+                            height:"7px",borderRadius:"25px",marginTop:"0px"}}></div>
+                </div>
+                <div style={{color:results.color,fontSize:"12px",margin:"5px"}}>{results.text}</div>
+            </>
         )
     }
 }  

@@ -4,3 +4,9 @@
 .systemHeaderbackground{
     --ion-background-color: white;
 }
+.systemProspectHeader{
+    --ion-background-color: dodgerblue;
+}
+ion-menu-button{
+    --color:dodgerblue;
+}

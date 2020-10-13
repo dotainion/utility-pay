@@ -51,7 +51,7 @@ const Payment = (data:any) => {
                 <IonList class="mainSubContainer">
                     <IonCard>
                         <IonItem className="paymentLableStyle" class="paymentItems" lines="none">
-                            <span>Bank Name</span>
+                            <span>Bank Name{asterisks}</span>
                             <IonSelect slot="end" placeholder="Choose your bank name" interface="popover" onIonChange={(e)=>{
                                 setCustomer({
                                     bank:e.detail.value,type:customer.type,acount:customer.acount,
@@ -65,7 +65,7 @@ const Payment = (data:any) => {
                     </IonCard>
                     <IonCard>
                         <IonItem className="paymentLableStyle" class="paymentItems" lines="none">
-                            <span>Service Type</span>
+                            <span>Service Type{asterisks}</span>
                             <IonSelect slot="end" placeholder="Choose your service type" interface="popover" onIonChange={(e)=>{
                                 setCustomer({
                                     bank:customer.bank,type:e.detail.value,acount:customer.acount,

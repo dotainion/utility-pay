@@ -20,3 +20,12 @@
 .itemListMainContainer{
     --ion-background-color: white;
 }
+
+/*for header*/
+
+
+/*for prospectHeader*/
+.prospectHeaderTitle{
+    color: white;
+    font-weight: bolder;
+}

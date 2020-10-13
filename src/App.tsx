@@ -24,6 +24,7 @@ import './theme/variables.css';
 
 /* Pages */
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Menu from './components/Menu';
 import MainPage from './pages/Main';
 
@@ -40,6 +41,7 @@ const App: React.FC = () => {
           </IonRouterOutlet>
         </IonSplitPane>
         
+        <Route path="/register" component={Register} exact />
         <Route path="/login" component={Login} exact />
         <Redirect from="/" to="/login" exact />
       </IonReactRouter>

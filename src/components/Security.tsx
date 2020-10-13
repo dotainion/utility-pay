@@ -23,7 +23,16 @@ export class Creds{
         window.localStorage.setItem("creds",creds);
     }
     get(){
-        return JSON.parse(window.localStorage.getItem("creds") || "");
+        const creds = window.localStorage.getItem("creds");
+        if (creds) return JSON.parse(creds);
+        else return {email:"",password:""};
+    }
+    rmbr(){
+        const creds = window.localStorage.getItem("creds");
+        if (creds){
+            if (JSON.parse(creds).email && JSON.parse(creds).password) return true;
+            return false;
+        }
     }
 }
 export class Security{
@@ -31,9 +40,10 @@ export class Security{
         try{
             const response = await firebase.auth().signInWithEmailAndPassword(email, password);
             console.log(response);
+            window.localStorage.setItem("login","login");
             return {state:true,message:""};
         }catch(error){
-            console.log(error)
+            window.localStorage.setItem("login","logout");
             if (error.code === "auth/user-not-found"){
                 return {state:null,message:"User dose not exist or may have been deactivated"};
             }else if (error.code === "auth/network-request-failed"){
@@ -51,6 +61,15 @@ export class Security{
             return {state:true,message:""};
         }catch(error){
             return {state:false,message:error.message};
+        }
+    }
+    isLogin(init:string=""){
+        if (init === "init"){
+            window.localStorage.setItem("login","logout");
+        }else{
+            const is_login = window.localStorage.getItem("login");
+            if (is_login === "login") return true;
+            return false;
         }
     }
 }
