@@ -1,9 +1,7 @@
 
 .mainContainer{
-    width: 40%;
-    padding-top: 0px;
+    padding: 10px;
     border: 1px solid lightgray;
-    margin-left: 20px;
     user-select: none;
     --ion-background-color: white;/*#EFFEFE;*/
 }
@@ -19,13 +17,18 @@
     font-size: 25px;
     --color: white;
 }
+.paymentDateAndDue{
+    color: dodgerblue;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-left: 20px;
+}
 .paymentItems{
     margin-top: 5px;
     border-radius: 3px;
-    /*border: 1px solid rgb(13, 117, 221);*/
+    border: 1px solid lightgray;
 }
 .paymentButton{
-    width: 40%;
     margin-top: 40px;
     text-align: center;
 }

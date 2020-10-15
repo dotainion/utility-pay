@@ -3,10 +3,10 @@
     position: absolute;
     border: 1px solid lightgray;
     border-radius: 50%;
-    transform: translate(-50%);
     background-color: skyblue;
 }
 .loginLogoSubContainer{
+    background-color: white;
     border-radius: 50%;
     padding: 10px;
 }
@@ -15,17 +15,18 @@
     margin-left: 50%;
     transform: translate(-50%);
 }
-
-/*for itemList*/
-.itemListMainContainer{
-    --ion-background-color: white;
+/*utilitySideInfo*/
+.utilitySideInfoContainer{
+    z-index: 1155;
+    position: absolute;
+    width: 450px;
 }
-
-/*for header*/
-
-
-/*for prospectHeader*/
-.prospectHeaderTitle{
-    color: white;
+.utilitySideInfoTitle{
+    color: dodgerblue;
+    font-size: 55px;
     font-weight: bolder;
+}
+.utilitySideInfoSubTitle{
+    color: navy;
+    font-size: 30px;
 }
