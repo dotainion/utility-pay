@@ -75,12 +75,16 @@ export const LoginRegister: React.FC = () =>{
         email:"RECOVER-EMAIL",
         validate:"RECOVER-VALIDATE",
     }
-    const [resendCodeBtnText, setResendCodeBtnText] = useState("Send")
+    const [resendCodeBtnText, setResendCodeBtnText] = useState("Send");
 
     const onLoginSubmit = (event:any) =>{
         setErrMsg(event.message);
         if (event.state){
-            if (LOGIN_INPUTS.rembr) userLogin.saveCreds(LOGIN_INPUTS);
+            if (LOGIN_INPUTS.rembr){
+                userLogin.saveCreds(LOGIN_INPUTS);
+            }else{
+                userLogin.clearCreds();
+            };
             tools.onClick.byId("payment");
             tools.onClick.showMenu();
         }
@@ -90,14 +94,17 @@ export const LoginRegister: React.FC = () =>{
         tools.onClick.startLoader();
         if (cmd == "login"){
             onLoginSubmit(await userLogin.login.check(LOGIN_INPUTS,login_id_obj));
+            //place save to database codes here
         }else if (cmd === "register"){
             if (userLogin.checkEmailCrdsMatch(register_id_obj.creds,REGISTER_INPUTS.creds,(e:any)=>{
                 setErrMsg(e.message);})){
-                onLoginSubmit(await userLogin.register.check(REGISTER_INPUTS))
+                onLoginSubmit(await userLogin.register.check(REGISTER_INPUTS));
+                //place save to database codes here
             }
         }else if (cmd === "recover"){
             console.log(RECOVER_INPUTS);
-            setSuccessMsg("Send");
+            setSuccessMsg("Sent");
+            //place recover codes here
         }
         tools.onClick.stopLoader();
     }
