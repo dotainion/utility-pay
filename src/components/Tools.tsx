@@ -1,7 +1,30 @@
 import { isPlatform } from "@ionic/react";
 
-
+class OnClick{
+    byId(ID:string){
+        try{document.getElementById(ID)?.click();
+        }catch(error){ console.log("by trying to click id: "+ID+" an error accure =>",error);}
+    }
+    showMenu(){
+        try{ document.getElementById("show-menu")?.click();
+        }catch(error){ console.log("Menu id dosent seem to exist =>",error);}
+    }
+    hideMenu(){
+        try{ document.getElementById("hide-menu")?.click();
+        }catch(error){ console.log("Menu id dosent seem to exist =>",error);}
+    }
+    startLoader(){
+        try{ document.getElementById("start-loader")?.click();
+        }catch(error){ console.log("loader id dosent seem to exist =>",error);}
+    }
+    stopLoader(){
+        try{ document.getElementById("stop-loader")?.click();
+        }catch(error){ console.log("loader id dosent seem to exist =>",error);}
+    }
+}
 class Tools{
+    onClick = new OnClick();
+
     toastMsg(msg:string,duration:number=3000,position:any="top",color:string="dark"){
         const toast = document.createElement('ion-toast');
         toast.message = msg;
@@ -62,11 +85,6 @@ class Tools{
         }else{
             return returnIfFalse;
         }
-    }
-    onIdClick(cmd:string){
-        try{
-            document.getElementById(cmd)?.click()
-        }catch{}
     }
     date(data:any=new Date().toString()){
         var index = 0;var temp = "";var dates = [];

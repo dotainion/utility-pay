@@ -30,11 +30,12 @@ class Checkout{
     checkOut(data:any){
         const btnSubmitRef = createRef<HTMLIonButtonElement>();
         const TITLE = data.title || "CCA";
+        const IMAGE = data.image || ccaImage;
         const SUB_TITLE = data.subTitle || "Testing";
         const CURRENCY = data.currency || "USD";
         const SUBMITE_BUTTON = "PAY";
         const BUTTON_TEXT = data.buttonText || "Pay With Card";
-        const PRICE = data.price || 0;
+        const PRICE = parseFloat(data.price) * 100 || 0;
         const EMAIL = data.email || "example@gmail.com"
         const SHIPPING_ADDRESS = data.shippingAddress || false;
         const BILLING_ADDRESS = data.billingAddress || false ;
@@ -48,7 +49,7 @@ class Checkout{
                 <StripeCheckout
                     name={TITLE}
                     description={SUB_TITLE}
-                    image={ccaImage}
+                    image={IMAGE}
                     panelLabel={SUBMITE_BUTTON}
                     amount={PRICE}
                     currency={CURRENCY}

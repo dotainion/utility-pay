@@ -1,4 +1,4 @@
-import { IonCard, IonCol, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonList, IonRow, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
+import { IonCard, IonCol, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonRow, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
 import React, { useState } from 'react';
 import './Payment.css';
 import './Main.css';
@@ -6,26 +6,38 @@ import { pay } from '../components/CardPay';
 import tools from '../components/Tools';
 import Widgets from '../components/Widgets';
 import LOGO from '../Images/nawasa.jpeg';
-
+import creds from '../entry-point/Security';
 
 
 const Payment = (data:any) => {
-    const [customer, setCustomer] = useState({bank:"",type:"",acount:"",email:"",amount:""});
+    const [customer, setCustomer] = useState({bank:"",type:"",acount:"",email:creds.getCreds().email,amount:""});
     let HIDDEN = true;
     if (data.onOpen === "Payment") HIDDEN = false;
     const asterisks = <span style={{color:"red"}}>*</span>;
-    const BANKS_LIST = [0,1,2,3,4,5,6,7,8,9,10];
+    const BANKS_LIST = ["RBTT Bank","CBIC Bank","Republic Bank","Co-Operative"];
     const SERVICE_TYPE = ["residential","commercial","other"];
     
     const customerChecks = () =>{
-        if (!tools.emailValidate(customer.email)){
-            tools.toastMsg("Invalid email address",3000,"middle","danger");
+        const pos = "top";
+        const color = "secondary";
+        const duration = 3000;
+        const amount = parseFloat(customer.amount);
+        if (!customer.bank){
+            tools.toastMsg("Your bank name was not provided",duration,pos,color);
+            return false
+        }else if (!customer.type){
+            tools.toastMsg("Your utility type was not provided",duration,pos,color);
+            return false
+        }else if (!customer.acount){
+            tools.toastMsg("Your utility account was not provided",duration,pos,color);
+            return false
+        }else if (!tools.emailValidate(customer.email)){
+            tools.toastMsg("Invalid email address",duration,pos,color);
             return false;
-        }else if (!customer.bank) return false;
-        else if (!customer.type) return false;
-        else if (!customer.acount) return false;
-        else if (!customer.amount) return false;
-        else return true;
+        }else if (isNaN(amount) || amount <= 0){
+            tools.toastMsg("A payment cost was not provided",duration,pos,color);
+            return false
+        }else return true;
     }
     return (
         <IonList hidden={HIDDEN}>
@@ -36,7 +48,7 @@ const Payment = (data:any) => {
             <IonGrid>
                 <IonRow>
                     <IonCol size-md="4" offset-md="0">
-                        <IonCard class="mainContainer">
+                        <IonList class="mainContainer">
                             <IonHeader class="paymentHeader" className="systemHeaderbackground">
                                 <IonToolbar>
                                     <IonTitle className="headerTitle">Payment</IonTitle>
@@ -53,7 +65,7 @@ const Payment = (data:any) => {
                             <IonList class="mainSubContainer">
                                     <IonItem className="paymentLableStyle" class="paymentItems" lines="none">
                                         <span>Bank Name{asterisks}</span>
-                                        <IonSelect slot="end" placeholder="Choose bank" interface="popover" onIonChange={(e)=>{
+                                        <IonSelect slot="end" placeholder="Choose" interface="popover" onIonChange={(e)=>{
                                             setCustomer({
                                                 bank:e.detail.value,type:customer.type,acount:customer.acount,
                                                 email:customer.email,amount:customer.amount
@@ -65,7 +77,7 @@ const Payment = (data:any) => {
                                     </IonItem>
                                     <IonItem className="paymentLableStyle" class="paymentItems" lines="none">
                                         <span>Service Type{asterisks}</span>
-                                        <IonSelect slot="end" placeholder="Choose service" interface="popover" onIonChange={(e)=>{
+                                        <IonSelect slot="end" placeholder="Choose" interface="popover" onIonChange={(e)=>{
                                             setCustomer({
                                                 bank:customer.bank,type:e.detail.value,acount:customer.acount,
                                                 email:customer.email,amount:customer.amount
@@ -98,15 +110,16 @@ const Payment = (data:any) => {
 
                                     <IonItem className="paymentLableStyle" class="paymentItems" lines="none">
                                         <IonLabel position="floating">Amount Paying{asterisks}</IonLabel>
-                                        <IonInput value={customer.amount} onIonChange={(e)=>{
+                                        
+                                        <IonInput type="number" value={customer.amount} onIonChange={(e)=>{
                                             if (e.detail.value) setCustomer({
                                                 bank:customer.bank,type:customer.type,acount:customer.acount,
                                                 email:customer.email,amount:e.detail.value
                                             });
-                                        }}/>
+                                        }}><span>$</span></IonInput>
                                     </IonItem>
                             </IonList>
-                        </IonCard>
+                        </IonList>
                     </IonCol>
                 </IonRow>
             </IonGrid>
@@ -116,14 +129,15 @@ const Payment = (data:any) => {
                     <IonCol size-md="4" offset-md="0">
                         <pay.checkOut
                             class="paymentButton"
-                            price={2}
+                            price={customer.amount}
                             title={"My name"}
+                            image={LOGO}
                             subTitle="checkout"
                             disable={false}
                             onOpen={()=>{}}
                             onDismiss={()=>{}}
-                            email="example@gmail.com"
-                            products={customer}
+                            email={customer.email}
+                            products={customer}//we are sending customer info as product
                             onWillOpen={async()=>{return await customerChecks()}}
                         />
                     </IonCol>

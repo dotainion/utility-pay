@@ -113,5 +113,12 @@ ion-item.selected {
 } 
 
 .menuMain{
-  width: 300px;
+  user-select: none;
+  --color: white;
+  border-right: 1px solid skyblue;
+  --ion-background-color: white;
+}
+.menuItemContainer{
+  color: blue;
+  --ion-font-weight: bold;
 }

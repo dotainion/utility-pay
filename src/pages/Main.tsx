@@ -14,7 +14,7 @@ const Page: React.FC = () => {
     
       <IonContent>
         <IonList>
-          <Payment onOpen={"Payment"}/>
+          <Payment onOpen={name}/>
         </IonList>
       </IonContent>
     </IonPage>

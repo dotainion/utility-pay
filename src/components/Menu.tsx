@@ -64,16 +64,16 @@ const Menu: React.FC = () => {
   //const location = useLocation();
 
   return (
-    <IonMenu hidden={hideMenu} contentId="menu" type="overlay" style={{width:tools.isMobil("","100px")}}>
+    <IonMenu hidden={hideMenu} contentId="menu" type="overlay" className="menuMain" style={{width:tools.isMobil("","100px")}}>
       <IonContent>
         <IonList id="inbox-list">
           <IonListHeader>{tools.texts().APPNAME.replace("Payments","")}</IonListHeader>
-          <IonNote>hi@ionicframework.com</IonNote>
+          <IonNote>NAWASA authority</IonNote>
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
-                <IonItem routerLink={appPage.url} routerDirection="none" lines="none">
-                  <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
+                <IonItem className="menuItemContainer" routerLink={appPage.url} routerDirection="none" lines="none">
+                  <IonIcon color="tertiary" slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
                   <IonLabel>{appPage.title}</IonLabel>
                 </IonItem>
               </IonMenuToggle>
@@ -84,10 +84,12 @@ const Menu: React.FC = () => {
         <IonList id="labels-list">
           <IonListHeader>Labels</IonListHeader>
           {labels.map((label, index) => (
-            <IonItem lines="none" key={index}>
-              <IonIcon slot="start" icon={bookmarkOutline} />
-              <IonLabel>{label}</IonLabel>
-            </IonItem>
+            <IonMenuToggle key={index} autoHide={false}>
+              <IonItem className="menuItemContainer" routerLink={"#"} lines="none">
+                <IonIcon color="tertiary" slot="start" icon={bookmarkOutline} />
+                <IonLabel>{label}</IonLabel>
+              </IonItem>
+            </IonMenuToggle>
           ))}
         </IonList>
       </IonContent>

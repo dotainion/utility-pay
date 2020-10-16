@@ -22,6 +22,9 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+/* import widgets */
+import widgets from './components/Widgets';
+
 /* Pages */
 import EntryPoint from './entry-point/GUI';
 import Menu from './components/Menu';
@@ -31,6 +34,7 @@ const App: React.FC = () => {
 
   return (
     <IonApp>
+      <widgets.loadSpinner/>
       <IonReactRouter>
         <IonSplitPane contentId="menu">
           <Menu />

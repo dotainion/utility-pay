@@ -65,13 +65,8 @@ class Widgets{
                     message={'Please wait...'}
                     //duration={5000}
                     />
-                
-                <IonButton hidden id="start-loader" onClick={()=>{
-                    setShowLoading(true);
-                }}/>
-                <IonButton hidden id="stop-loader" onClick={()=>{
-                    setShowLoading(false);
-                }}/>
+                <IonButton hidden id="start-loader" onClick={()=>{setShowLoading(true);}}/>
+                <IonButton hidden id="stop-loader" onClick={()=>{setShowLoading(false);}}/>
             </>
         )
     }

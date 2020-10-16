@@ -15,7 +15,7 @@ firebase.initializeApp(config);
 
 
 export class Security{
-    async login(email,password){
+    async login(email:string,password:string){
         try{
             const response = await firebase.auth().signInWithEmailAndPassword(email, password);
             window.localStorage.setItem("login",JSON.stringify(true));
@@ -31,7 +31,7 @@ export class Security{
             }
         }
     }
-    async register(email,password){
+    async register(email:string,password:string){
         try{
             const response = await firebase.auth().createUserWithEmailAndPassword(email, password);
             window.localStorage.setItem("login",JSON.stringify(true));
@@ -45,31 +45,32 @@ export class Security{
         window.localStorage.setItem("login",JSON.stringify(true));
     }
     isLogin(){
-        const is_login = JSON.parse(window.localStorage.getItem("login"));
-        if (is_login === true) return true;
+        const is_login = window.localStorage.getItem("login");
+        if (is_login && JSON.parse(is_login) === true) return true
         return false;
     }
 }
 
 
 class LoginHandlerClass{
-    constructor(tools){
+    tools:any = null;
+    toServer = new Security();
+    constructor(tools:any){
         this.tools = tools;
-        this.toServer = new Security();
     }
-    async check(credsObject,IdObject,color="red"){
+    async check(credsObject:any,IdObject:any,color:string="red"){
         let isValid = true;
         let errMsg = "";
         let emailError = false;
         let passwordError = false;
         if (this.tools.isEmailValid(credsObject.email) === false){
             isValid = false;
-            document.getElementById(IdObject.email).style.border = "1px solid "+color;
+            document.getElementById(IdObject.email)!.style.border = "1px solid "+color;
             emailError = true;
         }
         if (!credsObject.password){
             isValid = false;
-            document.getElementById(IdObject.password).style.border = "1px solid "+color;
+            document.getElementById(IdObject.password)!.style.border = "1px solid "+color;
             passwordError = true;
         }
         if (isValid) return await this.toServer.login(credsObject.email,credsObject.password);
@@ -81,9 +82,10 @@ class LoginHandlerClass{
 }
 
 class RegisterHandler{
-    constructor(tools){
+    tools:any = null;
+    toServer = new Security();
+    constructor(tools:any){
         this.tools = tools;
-        this.toServer = new Security();
     }
     REGISTER_INPUTS = {
         user:{
@@ -105,39 +107,90 @@ class RegisterHandler{
     objOganizer(){
 
     }
-    async check(credsObject){
+    async check(credsObject:any){
         if (this.tools.isEmailValid(credsObject.creds.email) === false) return {state:false,message:"Invalid email and password format"};
         return await this.toServer.register(credsObject.creds.email,credsObject.creds.password);
     }
 }
 
 class Tools{
-    constructor(){
-        this.login = new LoginHandlerClass(this);
-        this.register = new RegisterHandler(this);
-    }
-    errCheck(objId,inputsObj,color="red"){
+
+    login = new LoginHandlerClass(this);
+    register = new RegisterHandler(this);
+
+    errCheck(objId:any,inputsObj:any,color:string="red"){
         let STATE = true;
         for (var inputs of Object.keys(inputsObj)){
             if (inputsObj[inputs] === ""){
-                document.getElementById(objId[inputs]).style.border = "1px solid "+color;
+                document.getElementById(objId[inputs])!.style.border = "1px solid "+color;
                 STATE = false;
             }
         }
         return STATE;
     }
-    errReset(id,color="lightgray"){
-        document.getElementById(id).style.border = "1px solid "+color;
+    checkEmailCrdsMatch(objId:any,inputsObj:any,onReturnFunc:any){
+        let msg = "";
+        let msgCreds = "";
+        let msgEmail = "";
+        let STATE = this.errCheck(objId,inputsObj);
+        if (STATE){
+            if (inputsObj.password !== inputsObj.confirmpassord){
+                STATE = false;
+                msgCreds = "Passwords mismatch";
+            }
+            if (!this.isEmailValid(inputsObj.email)){
+                STATE = false;
+                msgEmail = "Invalid email format";
+            }
+            if (!STATE && onReturnFunc){
+                if (msgCreds && msgEmail) msg = msgEmail + " and " + msgCreds;
+                else if (msgCreds) msg = msgCreds;
+                else msg = msgEmail;
+            }
+            if (STATE){
+                if (!this.credsStrenght(inputsObj.password).is_strong){
+                    STATE = false;
+                    msg = "Password must contain a Capital letter, number and a symbol.";
+                }
+            }
+            onReturnFunc({state:STATE,message:msg,data:null});            
+        }
+        return STATE;
     }
-    errSet(id,color="lightgray"){
-        document.getElementById(id).style.border = "1px solid "+color;
+    credsStrenght(password:string){
+        var result = 0;
+        //check to see if password has 8 or more characters
+        if (password.split("").length >= 8) result ++;
+        //check for Capital letters
+        if (/[A-Z]/.test(password)) result ++;
+        //check for a Numeric value
+        if (/\d/.test(password)) result ++;
+        //check if password has a Symbol character
+        if (password.match(/[|\\/~^:,;?!&%$@#*+()]/)) result ++;
+        //check if value is 4
+        if (result === 4) return {value:result,is_strong:true};
+        return {value:result,is_strong:false};
     }
-    isEmailValid(email){
+    errReset(id:string,color="lightgray"){
+        document.getElementById(id)!.style.border = "1px solid "+color;
+    }
+    errSet(id:string,color="lightgray"){
+        document.getElementById(id)!.style.border = "1px solid "+color;
+    }
+    isEmailValid(email:string){
         const regix = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
         if (regix.test(email)) return true;
         return false;
     }
-    save(credentials){
+    isEmailValidWidthError(email:string,id:string,color:string="red"){
+        const regix = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+        if (regix.test(email)) return {state:true,message:""};
+        else {
+            document.getElementById(id)!.style.border = "1px solid "+color;
+            return {state:false,message:"Invalid email format"};
+        };
+    }
+    saveCreds(credentials:any){
         const creds = JSON.stringify({email:credentials.email,password:credentials.password});
         window.localStorage.setItem("creds",creds);
     }
