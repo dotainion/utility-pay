@@ -195,6 +195,9 @@ class SecurityTools{
         const creds = JSON.stringify({email:credentials.email,password:credentials.password});
         window.localStorage.setItem("creds",creds);
     }
+    clearCreds(){
+        window.localStorage.setItem("creds","");
+    }
     getCreds(){
         const creds = window.localStorage.getItem("creds");
         if (creds) return JSON.parse(creds);
