@@ -1,9 +1,14 @@
 import { isPlatform } from "@ionic/react";
+import auth from "../entry-point/Auth";
 
 class OnClick{
     byId(ID:string){
-        try{document.getElementById(ID)?.click();
-        }catch(error){ console.log("by trying to click id: "+ID+" an error accure =>",error);}
+        try{
+            if (ID === "logout") auth.secure.logOut();
+            else document.getElementById(ID)?.click();
+        }catch(error){
+            console.log("by trying to click id: "+ID+" an error accure =>",error);
+        }
     }
     showMenu(){
         try{ document.getElementById("show-menu")?.click();
@@ -22,11 +27,30 @@ class OnClick{
         }catch(error){ console.log("loader id dosent seem to exist =>",error);}
     }
 }
+class PageDirection{
+    ifNotLogin(direction:string="redirect-to-login"){
+        if (!auth.secure.isLogin()){
+            tools.onClick.byId(direction);
+            window.localStorage.setItem("redirect-error",JSON.stringify(true));
+        }
+    }
+    setRedirectState(state=false){
+        window.localStorage.setItem("redirect-error",JSON.stringify(state));
+    }
+    didRedirect(){
+        const is_redirect = window.localStorage.getItem("redirect-error");
+        if (is_redirect && JSON.parse(is_redirect) === true) return true;
+        else return false;
+    }
+    toLogin(){
+        tools.onClick.byId("redirect-to-login");
+    }
+}
 class Tools{
     onClick = new OnClick();
-
-    toastMsg(msg:string,duration:number=3000,position:any="top",color:string="dark"){
-        const toast = document.createElement('ion-toast');
+    redirect = new PageDirection();
+    async toastMsg(msg:string,duration:number=3000,position:any="top",color:string="dark"){
+        const toast = await document.createElement('ion-toast');
         toast.message = msg;
         toast.position = position;
         toast.duration = duration;
@@ -35,9 +59,9 @@ class Tools{
         document.body.appendChild(toast);
         return toast.present();
     }
-    toastWithCmd(msg:string="",onClick:any=false,okayText:string="Yes",
+    async toastWithCmd(msg:string="",onClick:any=false,okayText:string="Yes",
             cancelText:string="No",header:string="Warning!!",color:string="light",position:any="top"){
-        const toast = document.createElement("ion-toast");
+        const toast = await document.createElement("ion-toast");
         toast.header = header;
         toast.message = msg;
         toast.position = position;
@@ -194,5 +218,6 @@ class Tools{
         }
     }
 }
+
 const tools= new Tools();
 export default tools;

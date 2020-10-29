@@ -1,75 +1,26 @@
 import {IonButton, IonContent,IonIcon,IonItem,IonLabel,IonList,IonListHeader,IonMenu,IonMenuToggle,IonNote,} from '@ionic/react';
 import React, { useState } from 'react';
 //import { useLocation } from 'react-router-dom';
-import { archiveOutline, archiveSharp, bookmarkOutline, cardOutline, cardSharp, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
+import { bookmarkOutline } from 'ionicons/icons';
 import './Menu.css';
 import tools from './Tools';
+import { appPages } from './Config';
 
-interface AppPage {
-  url: string;
-  iosIcon: string;
-  mdIcon: string;
-  title: string;
-}
 
-const appPages: AppPage[] = [
-  {
-    title: 'Payment',
-    url: '/page/Payment',
-    iosIcon: cardOutline,
-    mdIcon: cardSharp
-  },
-  {
-    title: 'Inbox',
-    url: '/page/Inbox',
-    iosIcon: mailOutline,
-    mdIcon: mailSharp
-  },
-  {
-    title: 'Outbox',
-    url: '/page/Outbox',
-    iosIcon: paperPlaneOutline,
-    mdIcon: paperPlaneSharp
-  },
-  {
-    title: 'Favorites',
-    url: '/page/Favorites',
-    iosIcon: heartOutline,
-    mdIcon: heartSharp
-  },
-  {
-    title: 'Archived',
-    url: '/page/Archived',
-    iosIcon: archiveOutline,
-    mdIcon: archiveSharp
-  },
-  {
-    title: 'Trash',
-    url: '/page/Trash',
-    iosIcon: trashOutline,
-    mdIcon: trashSharp
-  },
-  {
-    title: 'Spam',
-    url: '/page/Spam',
-    iosIcon: warningOutline,
-    mdIcon: warningSharp
-  }
-];
 
 const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
 const Menu: React.FC = () => {
-  const [hideMenu, setHideMenu] = useState(true);
+  const [hideMenu, setHideMenu] = useState(false);
   //const location = useLocation();
-
+  tools.redirect.ifNotLogin()
   return (
     <IonMenu hidden={hideMenu} contentId="menu" type="overlay" className="menuMain" style={{width:tools.isMobil("","100px")}}>
       <IonContent>
         <IonList id="inbox-list">
           <IonListHeader>{tools.texts().APPNAME.replace("Payments","")}</IonListHeader>
           <IonNote>NAWASA authority</IonNote>
-          {appPages.map((appPage, index) => {
+          {appPages.get().map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
                 <IonItem className="menuItemContainer" routerLink={appPage.url} routerDirection="none" lines="none">

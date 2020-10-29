@@ -1,5 +1,5 @@
-/*tools file*/
 import * as firebase from 'firebase';
+import tools from '../components/Tools';
 
 const config = {
     apiKey: "AIzaSyDQdSVTeVQEk4i3VPfyc8jckSgPzK8Qf5A",
@@ -41,8 +41,9 @@ export class Security{
             return {state:false,message:error.message,data:null};
         }
     }
-    logOut(){
-        window.localStorage.setItem("login",JSON.stringify(true));
+    logOut(redirect=true){
+        window.localStorage.setItem("login",JSON.stringify(false));
+        if (redirect) tools.redirect.toLogin();
     }
     isLogin(){
         const is_login = window.localStorage.getItem("login");
@@ -113,8 +114,8 @@ class RegisterHandler{
     }
 }
 
-class Tools{
-
+class SecurityTools{
+    secure = new Security();
     login = new LoginHandlerClass(this);
     register = new RegisterHandler(this);
 
@@ -208,5 +209,5 @@ class Tools{
     }
 }
 
-const tools = new Tools();
-export default tools;
+const security_tools = new SecurityTools();
+export default security_tools;

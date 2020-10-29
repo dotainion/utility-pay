@@ -1,5 +1,39 @@
+/*for global widgets
+this will use for any widgets*/
+.hide-if-mobile{
+    display: none;
+}
+.hide-if-desktop{
+    display: block;
+}
+.header-hover:hover{
+    color: blue;
+}
+@media screen and (max-width:767px){
+    .hide-if-mobile{
+        display: block;
+    }
+    .hide-if-desktop{
+        display: none;
+    }
+}
+
+/*for header*/
+.header-main-container{
+    user-select: none;
+}
+.header-three-dot-button{
+    margin-right: 10px;
+    font-size: 25px;
+}
+.header-desktop-lists{
+    color: dodgerblue;
+    margin-right: 20px;
+}
+
+/*for logo*/
 .loginLogoContainer{
-    z-index: 999;
+    z-index: 1;
     position: absolute;
     border: 1px solid lightgray;
     border-radius: 50%;
@@ -15,9 +49,15 @@
     margin-left: 50%;
     transform: translate(-50%);
 }
+@media screen and (max-width:767px){
+    .loginLogoContainer{
+        display: none;
+    }
+}
+
 /*utilitySideInfo*/
 .utilitySideInfoContainer{
-    z-index: 1155;
+    z-index: 1;
     position: absolute;
     width: 450px;
 }
@@ -29,4 +69,131 @@
 .utilitySideInfoSubTitle{
     color: navy;
     font-size: 30px;
+}
+@media screen and (max-width:767px){
+    .utilitySideInfoContainer{
+        display: none;
+    }
+}
+
+/*for reusable component noConnection*/
+.noConnectionContainer{
+    text-align: center;
+    width: 100%;
+    color: blue;
+    position: fixed;
+    z-index:2;
+    user-select: none;
+    --ion-background-color: white;
+    border-bottom: 1px solid lightgray;
+}
+.noConnectionImage{
+    width: 130px;
+    margin-left: 50%;
+    transform: translate(-50%);
+}
+.noConnectionAlert{
+    color: orange;
+}
+.noConnectionText{
+    text-align: center;
+    width: 100%;
+    color: red;
+}
+.noConnectionSubText{
+    font-size: 11px;
+}
+.noConnectionArrowIcon{
+    font-size: 30px;
+    color: blue;
+    margin-bottom: -10px;
+}
+.noConnectionDetailButton{
+    width: 100%;
+    color: navy;
+    text-align: center;
+    text-decoration: underline;
+    transform: translate(60px);
+}
+.noConnectionDetailTextContainer{
+    width: 60%;
+    color: blue;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-left: 50%;
+    transform: translate(-50%);
+}
+.noConnectionDetailText{
+    text-align: justify;
+}
+.noConnectionDetailBtnHover:hover{
+    color: lightgray;
+}
+.noConnectionCloseXbutton{
+    width: 24px;
+    height: 24px;
+    color: white;
+    font-size: 25px;
+    border-radius: 50%;
+    background-color: red;  
+    margin-left: 96%; 
+    transform: translate(-50%); 
+}
+.noConnectionCloseButton{
+    width: 60px;
+    height: 25px;
+    text-transform: none;
+    margin-left: 52%;
+}
+.noConnectionCloseDisplayButton{
+    width: 60px;
+    height: 20px;
+}
+.noConnectionReferesher{
+    color: dodgerblue;
+    font-weight: bold;
+    text-align: center;
+}
+.noConnectionHover:hover{
+    background-color: gray; 
+}
+
+/*for menuDropDown*/
+.drop-down-menu-main-container{
+    position: absolute;
+    z-index: 99;
+    right: 0;
+    top: 57px;
+    border: 1px solid lightgray;
+    margin-right: 2px;
+    --ion-background-color: white;
+}
+.drop-down-hover:hover{
+    --ion-background-color: lightgray;
+}
+
+/*for footer*/
+.footer-mobile-main-container{
+    border-top: 1px solid gray;
+    display: none;
+}
+.footer-title-container{
+    width: 100%;
+    text-align: center;
+}
+.footer-span-container{
+    width: 100%;
+    text-align: center;
+}
+.footer-icon{
+    color: dodgerblue;
+}
+.footer-title{
+    font-size: 10px;
+    color: dodgerblue;
+}
+@media screen and (max-width:767px){
+    .footer-mobile-main-container{
+        display: block;
+    }
 }

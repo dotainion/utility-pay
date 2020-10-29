@@ -1,13 +1,15 @@
 /*login register file*/
-import { IonButton, IonCard, IonCheckbox, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonCard, IonCheckbox, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonList, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import React, { useState } from 'react';
 import './StyleSheet.css';
-import userLogin from './Security';
+import userLogin from './Auth';
 import Widgets from '../components/Widgets';
 import LOGO from '../Images/nawasa.jpeg';
 import tools from '../components/Tools';
+import no_connection_img from '../Images/brokenRobot.png';
 
 export const LoginRegister: React.FC = () =>{
+    const [internetConnection, setInternetConnection] = useState(false);
     const [errMsg, setErrMsg] = useState("");
     const [successMsg, setSuccessMsg] = useState("");
     const [LOGIN_INPUTS, SET_LOGIN_INPUTS] = useState({
@@ -79,14 +81,21 @@ export const LoginRegister: React.FC = () =>{
 
     const onLoginSubmit = (event:any) =>{
         setErrMsg(event.message);
-        if (event.state){
-            if (LOGIN_INPUTS.rembr) userLogin.saveCreds(LOGIN_INPUTS);
-            tools.onClick.byId("payment");
-            tools.onClick.showMenu();
+        console.log(event)
+        if (event.state === "no-connection"){
+            console.log("no connections")
+            setInternetConnection(true);
+        }else{
+            if (event.state){
+                if (LOGIN_INPUTS.rembr) userLogin.saveCreds(LOGIN_INPUTS);
+                tools.onClick.byId("payment");
+                tools.onClick.showMenu();
+            }
         }
     }
     const submitCall = async(cmd:string="login") =>{
         setErrMsg("");
+        setSuccessMsg("");
         tools.onClick.startLoader();
         if (cmd == "login"){
             onLoginSubmit(await userLogin.login.check(LOGIN_INPUTS,login_id_obj));
@@ -101,6 +110,13 @@ export const LoginRegister: React.FC = () =>{
         }
         tools.onClick.stopLoader();
     }
+
+    if (tools.redirect.didRedirect()){
+        const toast_msg = "You must first login to visit services"
+        tools.toastMsg(toast_msg,3000,"top","secondary");
+        tools.redirect.setRedirectState()
+    }
+
     return(
         <IonPage className="PAGE">
             <IonHeader className="HEADER">
@@ -111,9 +127,11 @@ export const LoginRegister: React.FC = () =>{
 
             <Widgets.logo top="150px" left="22%" size="100px" src={LOGO}/>
             <Widgets.utilitySideInfo top="300px" left="22%"/>
-
+            
             <IonContent>
-                <IonGrid>
+                <Widgets.noConnection onRefresh={()=>{submitCall();setInternetConnection(false);}} 
+                    isConnection={internetConnection} image={no_connection_img} onClose={()=>{setInternetConnection(false)}}/>
+                <IonGrid hidden={internetConnection}>
                     <IonRow>
                         <IonCol size-md="4" offset-md="7">
                             <IonCard class="MAIN-CONTAINER">
@@ -489,7 +507,7 @@ export const LoginRegister: React.FC = () =>{
                                                             enterEmail:false,
                                                             enterVerification:true,
                                                         })
-                                                    }
+                                                    }else setSuccessMsg("");
                                                 }}>Next</IonButton>
                                             </IonItem>
                                         </IonList>

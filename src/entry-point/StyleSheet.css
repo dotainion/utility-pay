@@ -1,5 +1,6 @@
 
 .PAGE{
+    user-select: none;
     --ion-background-color: #F0F5F6;
 }
 .HEADER{

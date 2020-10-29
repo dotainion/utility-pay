@@ -6,11 +6,11 @@ import { pay } from '../components/CardPay';
 import tools from '../components/Tools';
 import Widgets from '../components/Widgets';
 import LOGO from '../Images/nawasa.jpeg';
-import creds from '../entry-point/Security';
+import auth from '../entry-point/Auth';
 
 
 const Payment = (data:any) => {
-    const [customer, setCustomer] = useState({bank:"",type:"",acount:"",email:creds.getCreds().email,amount:""});
+    const [customer, setCustomer] = useState({bank:"",type:"",acount:"",email:auth.getCreds().email,amount:""});
     let HIDDEN = true;
     if (data.onOpen === "Payment") HIDDEN = false;
     const asterisks = <span style={{color:"red"}}>*</span>;
@@ -18,27 +18,37 @@ const Payment = (data:any) => {
     const SERVICE_TYPE = ["residential","commercial","other"];
     
     const customerChecks = () =>{
-        const pos = "top";
-        const color = "secondary";
-        const duration = 3000;
+        let STATE = true;
+        let msg = "";
+        const starts = "Yours ";
+        const ends = " was not provided.";
+        let index = 0;
+        const msgHandler = (text:string, finalize:boolean=false) =>{
+            if (!finalize){
+                STATE = false;
+                index ++;
+                if (index === 1) msg = msg + text;
+                else msg = msg + ", " + text;
+                return msg;
+            }else{
+                if (text === "Invalid email address") return msg;
+                else return starts + msg + ends;
+            }
+        }
         const amount = parseFloat(customer.amount);
-        if (!customer.bank){
-            tools.toastMsg("Your bank name was not provided",duration,pos,color);
-            return false
-        }else if (!customer.type){
-            tools.toastMsg("Your utility type was not provided",duration,pos,color);
-            return false
-        }else if (!customer.acount){
-            tools.toastMsg("Your utility account was not provided",duration,pos,color);
-            return false
-        }else if (!tools.emailValidate(customer.email)){
-            tools.toastMsg("Invalid email address",duration,pos,color);
-            return false;
-        }else if (isNaN(amount) || amount <= 0){
-            tools.toastMsg("A payment cost was not provided",duration,pos,color);
-            return false
-        }else return true;
+        if (!customer.bank) msgHandler("bank name");
+        if (!customer.type) msgHandler("utility type");
+        if (!customer.acount)  msgHandler("utility account");
+        if (isNaN(amount) || amount <= 0) msgHandler("payment cost");
+        if (!tools.emailValidate(customer.email)) msgHandler("Invalid email address");
+
+        if (STATE){
+            return STATE;
+        }else{
+            tools.toastMsg(msgHandler(msg,true),4000,"top","secondary");
+        }
     }
+
     return (
         <IonList hidden={HIDDEN}>
 
