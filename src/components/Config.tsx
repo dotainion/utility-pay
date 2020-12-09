@@ -74,7 +74,7 @@ class AppPages{
             mdIcon: trashSharp,
         }
     }
-    span(){
+    spam(){
         return {
             title: 'Spam',
             url: '/page/Spam',
@@ -101,7 +101,7 @@ class AppPages{
             appPages.favorites(),
             appPages.archived(),
             appPages.trash(),
-            appPages.span(),
+            appPages.spam(),
         ]
     }
 }

@@ -6,13 +6,14 @@ import { pay } from '../components/CardPay';
 import tools from '../components/Tools';
 import Widgets from '../components/Widgets';
 import LOGO from '../Images/nawasa.jpeg';
-import auth from '../entry-point/Auth';
+import auth from '../Authentication/Authenticate';
+import { appPages } from '../components/Config';
 
 
 const Payment = (data:any) => {
     const [customer, setCustomer] = useState({bank:"",type:"",acount:"",email:auth.getCreds().email,amount:""});
     let HIDDEN = true;
-    if (data.onOpen === "Payment") HIDDEN = false;
+    if (data.onOpen === appPages.payment().title) HIDDEN = false;
     const asterisks = <span style={{color:"red"}}>*</span>;
     const BANKS_LIST = ["RBTT Bank","CBIC Bank","Republic Bank","Co-Operative"];
     const SERVICE_TYPE = ["residential","commercial","other"];

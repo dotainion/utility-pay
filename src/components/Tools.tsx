@@ -1,5 +1,5 @@
 import { isPlatform } from "@ionic/react";
-import auth from "../entry-point/Auth";
+import auth from "../Authentication/Authenticate";
 
 class OnClick{
     byId(ID:string){

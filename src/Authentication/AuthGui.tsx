@@ -2,13 +2,14 @@
 import { IonButton, IonCard, IonCheckbox, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonList, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import React, { useState } from 'react';
 import './StyleSheet.css';
-import userLogin from './Auth';
+import userLogin from './Authenticate';
 import Widgets from '../components/Widgets';
 import LOGO from '../Images/nawasa.jpeg';
 import tools from '../components/Tools';
 import no_connection_img from '../Images/brokenRobot.png';
 
 export const LoginRegister: React.FC = () =>{
+    const [test, setTest] = useState("Try another way");
     const [internetConnection, setInternetConnection] = useState(false);
     const [errMsg, setErrMsg] = useState("");
     const [successMsg, setSuccessMsg] = useState("");
@@ -81,7 +82,6 @@ export const LoginRegister: React.FC = () =>{
 
     const onLoginSubmit = (event:any) =>{
         setErrMsg(event.message);
-<<<<<<< HEAD:src/entry-point/AuthGui.tsx
         console.log(event)
         if (event.state === "no-connection"){
             console.log("no connections")
@@ -92,16 +92,6 @@ export const LoginRegister: React.FC = () =>{
                 tools.onClick.byId("payment");
                 tools.onClick.showMenu();
             }
-=======
-        if (event.state){
-            if (LOGIN_INPUTS.rembr){
-                userLogin.saveCreds(LOGIN_INPUTS);
-            }else{
-                userLogin.clearCreds();
-            };
-            tools.onClick.byId("payment");
-            tools.onClick.showMenu();
->>>>>>> e5de825bf905c4161896a4a73594c67f40ac42bb:src/entry-point/GUI.tsx
         }
     }
     const submitCall = async(cmd:string="login") =>{
@@ -160,6 +150,10 @@ export const LoginRegister: React.FC = () =>{
                                     <IonLabel>{errMsg}</IonLabel>
                                     <IonLabel class="SUCCESS-MSG">{successMsg}</IonLabel>
                                 </IonList>
+
+                                <IonLabel class="TRY-ANOTHER-WAY-TO-LOGIN HOVER" onClick={()=>{
+                                    setTest("Not currently available")
+                                }}>{test}</IonLabel>
 
                                 {/*login gui*/}
                                 <IonList class="SUB-CONTAINER">
@@ -528,7 +522,7 @@ export const LoginRegister: React.FC = () =>{
 
                                         <IonList hidden={!IN_RECOVER_GUI_STATE.enterVerification}>
                                             <IonItem id={recover_id_obJ.validate}class="INPUT-IONITEM" lines="none">
-                                                <IonLabel position="floating">Validation</IonLabel>
+                                                <IonLabel position="floating">Validation goes here</IonLabel>
                                                 <IonInput type="text" onIonChange={e=>{
                                                     SET_RECOVER_INPUTS({
                                                         email:RECOVER_INPUTS.email,

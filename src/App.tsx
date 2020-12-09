@@ -26,7 +26,7 @@ import './theme/variables.css';
 import widgets from './components/Widgets';
 
 /* Pages */
-import EntryPoint from './entry-point/AuthGui';
+import EntryPoint from './Authentication/AuthGui';
 import Menu from './components/Menu';
 import MainPage from './pages/Main';
 

@@ -5,7 +5,7 @@ import '../pages/Main.css';
 import { useParams } from 'react-router';
 import tools from './Tools';
 import { chevronDownCircleOutline, chevronDownOutline, closeCircle, ellipsisVerticalSharp } from 'ionicons/icons';
-import { Security } from '../entry-point/Auth';
+import { Security } from '../Authentication/Authenticate';
 import { appPages, footerNotify } from './Config';
 
 

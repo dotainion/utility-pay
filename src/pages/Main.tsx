@@ -5,6 +5,15 @@ import Widgets from '../components/Widgets';
 import Payment from './Payment';
 import { useParams } from 'react-router';
 import tools from '../components/Tools';
+import History from './History';
+import Information from './Informations';
+import Notification from './Notification';
+import Inbox from './Inbox';
+import OutBox from './Outbox';
+import Favorites from './Favorites';
+import Archived from './Archived';
+import Trash from './Trash';
+import Spam from './Spam';
 
 
 const Page: React.FC = () => {
@@ -18,6 +27,15 @@ const Page: React.FC = () => {
       <IonContent>
         <IonList>
           <Payment onOpen={name}/>
+          <History onOpen={name}/>
+          <Information onOpen={name}/>
+          <Notification onOpen={name}/>
+          <Inbox onOpen={name}/>
+          <OutBox onOpen={name}/>
+          <Favorites onOpen={name}/>
+          <Archived onOpen={name}/>
+          <Trash onOpen={name}/>
+          <Spam onOpen={name}/>
         </IonList>
       </IonContent>
 
