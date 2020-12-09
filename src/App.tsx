@@ -28,7 +28,7 @@ import widgets from './components/Widgets';
 /* Pages */
 import EntryPoint from './Authentication/AuthGui';
 import Menu from './components/Menu';
-import MainPage from './pages/Main';
+import MainPage from './Main/Main';
 
 const App: React.FC = () => {
   return (

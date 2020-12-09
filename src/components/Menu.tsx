@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import { bookmarkOutline } from 'ionicons/icons';
 import './Menu.css';
 import tools from './Tools';
-import { appPages } from './Config';
+import { appPages, settingsPages } from './Config';
 
 
 
-const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+const labels = ['Reminders'];
 
 const Menu: React.FC = () => {
   const [hideMenu, setHideMenu] = useState(false);
@@ -33,12 +33,12 @@ const Menu: React.FC = () => {
         </IonList>
 
         <IonList id="labels-list">
-          <IonListHeader>Labels</IonListHeader>
-          {labels.map((label, index) => (
+          <IonListHeader>Settings</IonListHeader>
+          {settingsPages.get().map((settings, index) => (
             <IonMenuToggle key={index} autoHide={false}>
-              <IonItem className="menuItemContainer" routerLink={"#"} lines="none">
+              <IonItem className="menuItemContainer" routerLink={settings.url} lines="none">
                 <IonIcon color="tertiary" slot="start" icon={bookmarkOutline} />
-                <IonLabel>{label}</IonLabel>
+                <IonLabel>{settings.title}</IonLabel>
               </IonItem>
             </IonMenuToggle>
           ))}

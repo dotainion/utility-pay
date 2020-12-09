@@ -1,7 +1,7 @@
 import { IonCard, IonCol, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonRow, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
 import React, { useState } from 'react';
 import './Outbox.css';
-import './Main.css';
+import '../Main/Main.css';
 import { pay } from '../components/CardPay';
 import tools from '../components/Tools';
 import Widgets from '../components/Widgets';
@@ -17,6 +17,7 @@ const OutBox = (data:any) => {
 
     return (
         <IonList hidden={HIDDEN}>
+            <Widgets.sendMail/>
             <div className="empty-info">
                 <div>{data.onOpen} is comming soon</div>
                 <img className="empty-image" src={testImg}/>

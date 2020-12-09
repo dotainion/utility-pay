@@ -1,7 +1,7 @@
 import { IonCard, IonCol, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonRow, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
 import React, { useState } from 'react';
 import './Information.css';
-import './Main.css';
+import '../Main/Main.css';
 import { pay } from '../components/CardPay';
 import tools from '../components/Tools';
 import Widgets from '../components/Widgets';

@@ -1,7 +1,7 @@
-import { IonButton, IonButtons, IonCard, IonContent, IonFooter, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonLoading, IonMenuButton, IonPopover, IonRefresher, IonRefresherContent, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonCard, IonCheckbox, IonContent, IonFooter, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonLoading, IonMenuButton, IonModal, IonNote, IonPopover, IonRefresher, IonRefresherContent, IonSelect, IonSelectOption, IonTextarea, IonTitle, IonToolbar } from '@ionic/react';
 import React, { useState } from 'react';
 import './Widgets.css';
-import '../pages/Main.css';
+import '../Main/Main.css';
 import { useParams } from 'react-router';
 import tools from './Tools';
 import { chevronDownCircleOutline, chevronDownOutline, closeCircle, ellipsisVerticalSharp } from 'ionicons/icons';
@@ -202,6 +202,49 @@ class Widgets{
                 <IonIcon class="noConnectionArrowIcon" icon={chevronDownOutline}/>
             </IonList>
             </>
+        )
+    }
+    sendMail(){
+        const [openMail, setOpenMail] = useState(false);
+        const options:any = ["Fault","Recommendation","About my bill"]
+        return(
+            <IonList>
+                <IonButton color="light" onClick={()=>{
+                    setOpenMail(true);
+                }}>SEnd Email +</IonButton>
+
+                <IonModal isOpen={openMail} onDidDismiss={()=>{setOpenMail(false)}}>
+                    <IonList class="send-mail-container">
+                        <IonItem class="send-mail-header" lines="full">
+                            <IonLabel>Send Mail</IonLabel>
+                        </IonItem>
+
+                        <IonList class="send-mail-info">
+                            <IonNote>message test info</IonNote>
+                        </IonList>
+
+                        <IonItem class="send-mail-select-option" lines="none">
+                            <IonSelect style={{overflow:"none"}} placeholder="Select a option" interface="popover">
+                                {options.map((option:any, key:any)=>(
+                                    <IonSelectOption key={key}>{option}</IonSelectOption>
+                                ))}
+                            </IonSelect>
+                        </IonItem>
+                        
+                        <IonLabel>Message</IonLabel>
+                        <IonTextarea class="send-mail-textarea" onIonChange={()=>{
+
+                        }} placeholder="Place your message here"/>
+                    
+                        <IonItem lines="none">
+                            <IonButton slot="end" onClick={()=>{
+                                setOpenMail(false);
+                            }}>Close</IonButton>
+                            <IonButton slot="end">Send</IonButton>
+                        </IonItem>
+                    </IonList>
+                </IonModal>
+            </IonList>
         )
     }
 }  

@@ -197,3 +197,28 @@ this will use for any widgets*/
         display: block;
     }
 }
+
+/* for sendMail */
+.send-mail-container{
+    width: 95%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+.send-mail-header{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.send-mail-info{
+    text-align: center;
+}
+.send-mail-select-option{
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    margin-bottom: 15px;
+}
+.send-mail-textarea{
+    height: 300px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+}

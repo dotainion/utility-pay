@@ -107,6 +107,21 @@ class AppPages{
 }
 export const appPages = new AppPages();
 
+class SettingsPage{
+    reminder(){
+        return{
+            title: "Reminder",
+            url: "/page/Reminder"
+        }
+    }
+    get(){
+        return[
+            settingsPages.reminder(),
+        ]
+    }
+}
+export const settingsPages = new SettingsPage();
+
 class FooterNotify{
     id(){
         return[

@@ -2,18 +2,19 @@ import { IonContent, IonList, IonPage } from '@ionic/react';
 import React from 'react';
 import './Main.css';
 import Widgets from '../components/Widgets';
-import Payment from './Payment';
+import Payment from '../pages/Payment';
 import { useParams } from 'react-router';
 import tools from '../components/Tools';
-import History from './History';
-import Information from './Informations';
-import Notification from './Notification';
-import Inbox from './Inbox';
-import OutBox from './Outbox';
-import Favorites from './Favorites';
-import Archived from './Archived';
-import Trash from './Trash';
-import Spam from './Spam';
+import History from '../pages/History';
+import Information from '../pages/Informations';
+import Notification from '../pages/Notification';
+import Inbox from '../pages/Inbox';
+import OutBox from '../pages/Outbox';
+import Favorites from '../pages/Favorites';
+import Archived from '../pages/Archived';
+import Trash from '../pages/Trash';
+import Spam from '../pages/Spam';
+import Reminder from '../Settings/Reminder';
 
 
 const Page: React.FC = () => {
@@ -26,6 +27,7 @@ const Page: React.FC = () => {
     
       <IonContent>
         <IonList>
+          {/* from pages */}
           <Payment onOpen={name}/>
           <History onOpen={name}/>
           <Information onOpen={name}/>
@@ -36,6 +38,9 @@ const Page: React.FC = () => {
           <Archived onOpen={name}/>
           <Trash onOpen={name}/>
           <Spam onOpen={name}/>
+
+          {/* from settings */}
+          <Reminder onOpen={name}/>
         </IonList>
       </IonContent>
 
