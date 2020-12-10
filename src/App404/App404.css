@@ -1,0 +1,11 @@
+.app-404-container{
+    height: 100%;
+    user-select: none;
+    --ion-background-color: var(--sys-background-color);
+}
+.app-404-sub-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+}

@@ -1,5 +1,6 @@
 import { isPlatform } from "@ionic/react";
 import auth from "../Authentication/Authenticate";
+import { globalVar } from "../Global/GlobalVar";
 
 class OnClick{
     byId(ID:string){
@@ -11,11 +12,11 @@ class OnClick{
         }
     }
     showMenu(){
-        try{ document.getElementById("show-menu")?.click();
+        try{ document.getElementById(globalVar.id.showMenu)?.click();
         }catch(error){ console.log("Menu id dosent seem to exist =>",error);}
     }
     hideMenu(){
-        try{ document.getElementById("hide-menu")?.click();
+        try{ document.getElementById(globalVar.id.hidemenu)?.click();
         }catch(error){ console.log("Menu id dosent seem to exist =>",error);}
     }
     startLoader(){
@@ -28,7 +29,7 @@ class OnClick{
     }
 }
 class PageDirection{
-    ifNotLogin(direction:string="redirect-to-login"){
+    ifNotLogin(direction:string=globalVar.id.toLogin){
         if (!auth.secure.isLogin()){
             tools.onClick.byId(direction);
             window.localStorage.setItem("redirect-error",JSON.stringify(true));
@@ -43,7 +44,7 @@ class PageDirection{
         else return false;
     }
     toLogin(){
-        tools.onClick.byId("redirect-to-login");
+        tools.onClick.byId(globalVar.id.toLogin);
     }
 }
 class Tools{

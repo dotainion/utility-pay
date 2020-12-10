@@ -5,6 +5,7 @@ import { bookmarkOutline } from 'ionicons/icons';
 import './Menu.css';
 import tools from './Tools';
 import { appPages, settingsPages } from './Config';
+import { globalVar } from '../Global/GlobalVar';
 
 
 
@@ -44,8 +45,8 @@ const Menu: React.FC = () => {
           ))}
         </IonList>
       </IonContent>
-      <IonButton hidden id="show-menu" onClick={()=>{setHideMenu(false)}}/>
-      <IonButton hidden id="hide-menu" onClick={()=>{setHideMenu(true)}}/>
+      <IonButton hidden id={globalVar.id.showMenu} onClick={()=>{setHideMenu(false)}}/>
+      <IonButton hidden id={globalVar.id.hidemenu} onClick={()=>{setHideMenu(true)}}/>
     </IonMenu>
   );
 };
