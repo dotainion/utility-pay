@@ -60,6 +60,7 @@ this will use for any widgets*/
     z-index: 1;
     position: absolute;
     width: 450px;
+    user-select: none;
 }
 .utilitySideInfoTitle{
     color: dodgerblue;

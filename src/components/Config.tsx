@@ -1,4 +1,4 @@
-import { archiveOutline, archiveSharp, cardOutline, cardSharp, heartOutline, heartSharp, informationCircleOutline, informationCircleSharp, mailOutline, mailSharp, notificationsOutline, notificationsSharp, paperPlaneOutline, paperPlaneSharp, receiptOutline, receiptSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
+import { archiveOutline, archiveSharp, bookmarkOutline, cardOutline, cardSharp, heartOutline, heartSharp, informationCircleOutline, informationCircleSharp, mailOutline, mailSharp, notificationsOutline, notificationsSharp, paperPlaneOutline, paperPlaneSharp, receiptOutline, receiptSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
 
 
 class AppPages{
@@ -82,45 +82,49 @@ class AppPages{
             mdIcon: warningSharp,
         }
     }
+    reminder(){
+        return{
+            title: 'Reminder',
+            url: '/page/Reminder',
+            iosIcon: bookmarkOutline,
+            mdIcon: bookmarkOutline,
+        }
+    }
+    address(){
+        return{
+            title: 'Update address',
+            url: '/page/Update address',
+            iosIcon: bookmarkOutline,
+            mdIcon: bookmarkOutline,
+        }
+    }
     footer(){
         return [
-            appPages.payment(),
-            appPages.history(),
-            appPages.information(),
-            appPages.notificaton(),
+            this.payment(),
+            this.history(),
+            this.information(),
+            this.notificaton(),
         ]
     }
     get(){
         return [
-            appPages.payment(),
-            appPages.history(),
-            appPages.information(),
-            appPages.notificaton(),
-            appPages.inbox(),
-            appPages.outbox(),
-            appPages.favorites(),
-            appPages.archived(),
-            appPages.trash(),
-            appPages.spam(),
+            this.payment(),
+            this.history(),
+            this.information(),
+            this.notificaton(),
+            this.inbox(),
+            //this.outbox(),
+            //this.favorites(),
+            //this.archived(),
+            //this.trash(),
+            //this.spam(),
+            this.reminder(),
+            this.address()
         ]
     }
 }
 export const appPages = new AppPages();
 
-class SettingsPage{
-    reminder(){
-        return{
-            title: "Reminder",
-            url: "/page/Reminder"
-        }
-    }
-    get(){
-        return[
-            settingsPages.reminder(),
-        ]
-    }
-}
-export const settingsPages = new SettingsPage();
 
 class FooterNotify{
     id(){

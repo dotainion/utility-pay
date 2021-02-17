@@ -2,18 +2,13 @@ import { IonCard, IonCol, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLab
 import React, { useState } from 'react';
 import './Reminder.css';
 import '../Main/Main.css';
-import { pay } from '../components/CardPay';
-import tools from '../components/Tools';
-import Widgets from '../components/Widgets';
-import LOGO from '../Images/nawasa.jpeg';
 import testImg from '../Images/test.png';
-import auth from '../Authentication/Authenticate';
 import { appPages } from '../components/Config';
 
 
-const Reminder = (data:any) => {
+const ChangeAddress = (data:any) => {
     let HIDDEN = true;
-    if (data.onOpen === appPages.reminder().title) HIDDEN = false;
+    if (data.onOpen === appPages.address().title) HIDDEN = false;
 
     return (
         <IonList hidden={HIDDEN}>
@@ -25,4 +20,4 @@ const Reminder = (data:any) => {
     );
 };
 
-export default Reminder;
+export default ChangeAddress;

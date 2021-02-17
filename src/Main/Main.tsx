@@ -14,12 +14,12 @@ import Favorites from '../pages/Favorites';
 import Archived from '../pages/Archived';
 import Trash from '../pages/Trash';
 import Spam from '../pages/Spam';
-import Reminder from '../Settings/Reminder';
+import Reminder from '../settings/Reminder';
+import ChangeAddress from '../settings/ChangeAddress';
 
 
 const Page: React.FC = () => {
   const { name } = useParams<{name:string}>();
-  tools.redirect.ifNotLogin()//check if user is login else redirect to login
   return (
     <IonPage className="systemBackgrund">
       <Widgets.Header/>
@@ -41,6 +41,7 @@ const Page: React.FC = () => {
 
           {/* from settings */}
           <Reminder onOpen={name}/>
+          <ChangeAddress onOpen={name}/>
         </IonList>
       </IonContent>
 

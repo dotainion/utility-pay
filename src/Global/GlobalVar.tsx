@@ -1,27 +1,8 @@
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class Routes{
     login = "/login";
-    pagePath = "/page/:name"
+    pagePath = "/page/:name";
 }
 
 class Ids{

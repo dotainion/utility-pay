@@ -8,11 +8,13 @@ firebase.initializeApp(config);
 
 export class Security{
     async login(email:string,password:string){
+        console.log(email,password)
         try{
             const response = await firebase.auth().signInWithEmailAndPassword(email, password);
             window.localStorage.setItem("login",JSON.stringify(true));
             return {state:true,message:"",data:response};
         }catch(error){
+            console.log(error)
             window.localStorage.setItem("login",JSON.stringify(false));
             if (error.code === "auth/user-not-found"){
                 return {state:null,message:"User dose not exist or may have been deactivated",data:null};
@@ -33,13 +35,17 @@ export class Security{
             return {state:false,message:error.message,data:null};
         }
     }
-    logOut(redirect=true){
+    async logOut(redirect=true){
         window.localStorage.setItem("login",JSON.stringify(false));
+        await firebase.auth().signOut();
         if (redirect) tools.redirect.toLogin();
     }
     isLogin(){
         const is_login = window.localStorage.getItem("login");
-        if (is_login && JSON.parse(is_login) === true) return true
+        if (is_login){
+            if (JSON.parse(is_login) === true || firebase.auth().currentUser !== null)
+            return true;
+        }
         return false;
     }
 }

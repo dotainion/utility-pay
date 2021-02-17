@@ -27,10 +27,11 @@ import widgets from './components/Widgets';
 
 /* Pages */
 import App404 from './App404/App404';
-import EntryPoint from './Authentication/AuthGui';
+import LoginRegisterRecover from './Authentication/AuthGui';
 import Menu from './components/Menu';
 import MainPage from './Main/Main';
 import { globalVar } from './Global/GlobalVar';
+import Auth from './Auth';
 
 
 const App: React.FC = () => {
@@ -42,13 +43,13 @@ const App: React.FC = () => {
           <Menu />
           <IonRouterOutlet id="menu">
             <Switch>
-              <Route path={globalVar.route.pagePath} component={MainPage} exact />
+              <Route path={globalVar.route.pagePath} render={()=><Auth Components={MainPage}/>} exact />
               <Redirect from="/" to={globalVar.route.login} exact />
             </Switch>
           </IonRouterOutlet>
         </IonSplitPane>
         <Switch>
-          <Route path={globalVar.route.login} component={EntryPoint} exact />
+          <Route path={globalVar.route.login} component={LoginRegisterRecover} exact />
           <Route component={App404} />
           <Redirect from="/" to={globalVar.route.login} exact />
         </Switch>
