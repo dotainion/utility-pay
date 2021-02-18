@@ -1,0 +1,28 @@
+.notification-main-container{
+    margin-left: 20px;
+    margin-right: 10px;
+}
+.notification-item-container{
+    color: rgb(0, 89, 255);
+    padding-bottom: 20px;
+    user-select: none;
+    border-bottom: 1px solid rgb(199, 197, 197);
+}
+.notification-icon{
+    font-size: 25px;
+    margin-right: 5px;
+    color: blue;
+}
+.notification-icon2{
+    font-size: 25px;
+    margin-right: 5px;
+    color: blue;
+}
+.notification-general-info-header{
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 40px;
+    user-select: none;
+    border-bottom: 2px solid gray;
+}

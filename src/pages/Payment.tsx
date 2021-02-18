@@ -21,8 +21,8 @@ const Payment = (data:any) => {
     const customerChecks = () =>{
         let STATE = true;
         let msg = "";
-        const starts = "Yours ";
-        const ends = " was not provided.";
+        const starts = "Your ";
+        const ends = " either not entered or was entered incorrectly.";
         let index = 0;
         const msgHandler = (text:string, finalize:boolean=false) =>{
             if (!finalize){
@@ -87,7 +87,7 @@ const Payment = (data:any) => {
                                         </IonSelect>
                                     </IonItem>
                                     <IonItem className="paymentLableStyle" class="paymentItems" lines="none">
-                                        <span>Service Type{asterisks}</span>
+                                        <span>Service{asterisks}</span>
                                         <IonSelect slot="end" placeholder="Choose" interface="popover" onIonChange={(e)=>{
                                             setCustomer({
                                                 bank:customer.bank,type:e.detail.value,acount:customer.acount,
@@ -110,7 +110,7 @@ const Payment = (data:any) => {
                                     </IonItem>
 
                                     <IonItem className="paymentLableStyle" class="paymentItems" lines="none">
-                                        <IonLabel position="floating">example@gamil.com{asterisks}</IonLabel>
+                                        <IonLabel position="floating">Email{asterisks}</IonLabel>
                                         <IonInput value={customer.email} onIonChange={(e)=>{
                                             if (e.detail.value) setCustomer({
                                                 bank:customer.bank,type:customer.type,acount:customer.acount,
@@ -120,7 +120,7 @@ const Payment = (data:any) => {
                                     </IonItem>
 
                                     <IonItem className="paymentLableStyle" class="paymentItems" lines="none">
-                                        <IonLabel position="floating">Amount Paying{asterisks}</IonLabel>
+                                        <IonLabel position="floating">Amount{asterisks}</IonLabel>
                                         
                                         <IonInput type="number" value={customer.amount} onIonChange={(e)=>{
                                             if (e.detail.value) setCustomer({

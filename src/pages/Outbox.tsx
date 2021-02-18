@@ -9,6 +9,7 @@ import LOGO from '../Images/nawasa.jpeg';
 import testImg from '../Images/test.png';
 import auth from '../Authentication/Authenticate';
 import { appPages } from '../components/Config';
+import { ComingSoon } from '../components/ComingSoon';
 
 
 const OutBox = (data:any) => {
@@ -18,10 +19,7 @@ const OutBox = (data:any) => {
     return (
         <IonList hidden={HIDDEN}>
             <Widgets.sendMail/>
-            <div className="empty-info">
-                <div>{data.onOpen} is comming soon</div>
-                <img className="empty-image" src={testImg}/>
-            </div>
+            <ComingSoon name={data.onOpen}/>
         </IonList>
     );
 };

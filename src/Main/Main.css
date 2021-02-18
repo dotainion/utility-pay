@@ -11,18 +11,6 @@ ion-menu-button{
     --color:dodgerblue;
 }
 
-.empty-info{
-    width: 100%;
-    margin-top: 40%;
-    text-align: center;
-    transform: translateY(-40%);
-    font-size: 30px;
-    color: dodgerblue;
-}
-.empty-image{
-    border-radius: 50%;
-    animation: rotation 4s infinite linear;
-}
 @keyframes rotation {
     from {
       transform: rotate(0deg);

@@ -100,7 +100,7 @@ class Tools{
             else return false; 
         }
     }
-    isMobil(returnTrue:any, returnFalse:any){
+    isMobil(returnTrue:any=true, returnFalse:any=false){
         if (this.platform()) return returnTrue;
         else return returnFalse;
     }

@@ -26,23 +26,21 @@ const Page: React.FC = () => {
       <Widgets.menuDropDown/>
     
       <IonContent>
-        <IonList>
-          {/* from pages */}
-          <Payment onOpen={name}/>
-          <History onOpen={name}/>
-          <Information onOpen={name}/>
-          <Notification onOpen={name}/>
-          <Inbox onOpen={name}/>
-          <OutBox onOpen={name}/>
-          <Favorites onOpen={name}/>
-          <Archived onOpen={name}/>
-          <Trash onOpen={name}/>
-          <Spam onOpen={name}/>
+        {/* from pages */}
+        <Payment onOpen={name}/>
+        <History onOpen={name}/>
+        <Information onOpen={name}/>
+        <Notification onOpen={name}/>
+        <Inbox onOpen={name}/>
+        <OutBox onOpen={name}/>
+        <Favorites onOpen={name}/>
+        <Archived onOpen={name}/>
+        <Trash onOpen={name}/>
+        <Spam onOpen={name}/>
 
-          {/* from settings */}
-          <Reminder onOpen={name}/>
-          <ChangeAddress onOpen={name}/>
-        </IonList>
+        {/* from settings */}
+        <Reminder onOpen={name}/>
+        <ChangeAddress onOpen={name}/>
       </IonContent>
 
       <Widgets.footer/>

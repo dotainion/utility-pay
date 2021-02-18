@@ -7,6 +7,7 @@ import Widgets from '../components/Widgets';
 import LOGO from '../Images/nawasa.jpeg';
 import tools from '../components/Tools';
 import no_connection_img from '../Images/brokenRobot.png';
+import { NoConnection } from '../components/NoConnection';
 
 export const LoginRegister: React.FC = () =>{
     const [test, setTest] = useState("Try another way");
@@ -82,7 +83,6 @@ export const LoginRegister: React.FC = () =>{
 
     const onLoginSubmit = (event:any) =>{
         setErrMsg(event.message);
-        console.log(event)
         if (event.state === "no-connection"){
             console.log("no connections")
             setInternetConnection(true);
@@ -92,6 +92,7 @@ export const LoginRegister: React.FC = () =>{
                 tools.onClick.byId("payment");
                 tools.onClick.showMenu();
             }
+            setInternetConnection(false)
         }
     }
     const submitCall = async(cmd:string="login") =>{
@@ -112,7 +113,9 @@ export const LoginRegister: React.FC = () =>{
             setSuccessMsg("Sent");
             //place recover codes here
         }
-        tools.onClick.stopLoader();
+        setTimeout(() => {
+            tools.onClick.stopLoader();
+        }, 500);
     }
 
     if (tools.redirect.didRedirect()){
@@ -133,8 +136,16 @@ export const LoginRegister: React.FC = () =>{
             <Widgets.utilitySideInfo top="300px" left="22%"/>
             
             <IonContent>
-                <Widgets.noConnection onRefresh={()=>{submitCall();setInternetConnection(false);}} 
-                    isConnection={internetConnection} image={no_connection_img} onClose={()=>{setInternetConnection(false)}}/>
+                <NoConnection 
+                    onRefresh={()=>{
+                        submitCall();
+                    }} 
+                    isNoConnection={internetConnection}
+                    image={no_connection_img} 
+                    onClose={()=>{
+                        setInternetConnection(false)
+                    }}
+                />
                 <IonGrid hidden={internetConnection}>
                     <IonRow>
                         <IonCol size-md="4" offset-md="7">

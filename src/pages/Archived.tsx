@@ -6,9 +6,9 @@ import { pay } from '../components/CardPay';
 import tools from '../components/Tools';
 import Widgets from '../components/Widgets';
 import LOGO from '../Images/nawasa.jpeg';
-import testImg from '../Images/test.png';
 import auth from '../Authentication/Authenticate';
 import { appPages } from '../components/Config';
+import { ComingSoon } from '../components/ComingSoon';
 
 
 const Archived = (data:any) => {
@@ -17,10 +17,7 @@ const Archived = (data:any) => {
 
     return (
         <IonList hidden={HIDDEN}>
-            <div className="empty-info">
-                <div>{data.onOpen} is comming soon</div>
-                <img className="empty-image" src={testImg}/>
-            </div>
+            <ComingSoon name={data.onOpen}/>
         </IonList>
     );
 };

@@ -1,0 +1,15 @@
+.empty-info{
+    width: 100%;
+    margin-top: 40%;
+    text-align: center;
+    transform: translateY(-40%);
+    font-size: 30px;
+    color: dodgerblue;
+}
+.empty-image{
+    margin-top: 50px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    animation: rotation 4s infinite linear;
+}

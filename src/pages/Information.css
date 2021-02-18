@@ -1,0 +1,26 @@
+.notification-container{
+    margin: 20px;
+    text-align: center;
+}
+.notification-image{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.notification-image ion-img{
+    margin: 10px;
+    box-shadow: 4px 4px 10px gray;
+}
+.notification-image ion-img:hover{
+    transform: scale(1.1);
+    border: 1px solid green;
+}
+ion-item p{
+    color: blue;
+}
+
+@media screen and (max-width:767px){
+    .notification-image{
+        display: block;
+    }
+}

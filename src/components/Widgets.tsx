@@ -4,9 +4,10 @@ import './Widgets.css';
 import '../Main/Main.css';
 import { useParams } from 'react-router';
 import tools from './Tools';
-import { chevronDownCircleOutline, chevronDownOutline, closeCircle, ellipsisVerticalSharp } from 'ionicons/icons';
+import { addOutline, chevronDownCircleOutline, chevronDownOutline, closeCircle, ellipsisVerticalSharp } from 'ionicons/icons';
 import { Security } from '../Authentication/Authenticate';
 import { appPages, footerNotify } from './Config';
+import { BiMessageRoundedAdd } from 'react-icons/bi';
 
 
 class Widgets{
@@ -146,64 +147,6 @@ class Widgets{
         )
     }
    
-    noConnection(data:any){
-        //accepts only 2 parameter 'hidden and image'
-        //hidden will show or hide the widget and image will display to the screen as connection error
-        const [showDetails, setShowDetails] = useState(false);
-        const doRefresh = (event:any) =>{          
-            setTimeout(() => {
-                if (data.onRefresh && data.isConnection === true){
-                    data.onRefresh();
-                }
-                event.detail.complete();
-            }, 500);
-        }
-        return(
-            <>
-            <IonRefresher className="noConnectionReferesher" slot="fixed" onIonRefresh={(e)=>{doRefresh(e);}}>
-                <p hidden={data.isConnection}>NAWASA SERVING THE NATION.</p>
-                <IonRefresherContent
-                    hidden={!data.isConnection}
-                    pullingIcon={chevronDownCircleOutline}
-                    pullingText="Pull to refresh"
-                    refreshingSpinner="circles"
-                    refreshingText="Refreshing...">
-                </IonRefresherContent>
-            </IonRefresher>
-            <IonList hidden={!data.isConnection} class="noConnectionContainer">
-                <div className="noConnectionCloseXbutton noConnectionHover">
-                    <IonIcon onClick={()=>{if (data.onClose) data.onClose()}} icon={closeCircle}/>
-                </div>
-                <IonItem lines="none">
-                    <IonImg class="noConnectionImage" src={data.image}/>
-                </IonItem>
-                <div><IonLabel className="noConnectionAlert">Oops!</IonLabel></div>
-                <div><IonLabel className="noConnectionText">No Internet Connection</IonLabel></div>
-                <div><IonLabel class="noConnectionSubText">Check your connection and try again</IonLabel></div>
-                <IonItem hidden={showDetails} lines="none">
-                    <span slot="end" onClick={()=>{
-                        setShowDetails(true)
-                    }} className="noConnectionDetailButton noConnectionDetailBtnHover">details</span> 
-                </IonItem>
-                <div hidden={!showDetails} className="noConnectionDetailTextContainer">
-                    <p className="noConnectionDetailText">
-                        “Any one can write code that a computer can understand. 
-                        Good programmers write code that humans can understand.
-                        When to use iterative development? You should use iterative
-                        development only on projects that you want to succeed.”
-                    </p>
-                    <IonItem lines="none">
-                        <IonButton class="noConnectionCloseButton" onClick={()=>{
-                            setShowDetails(false)
-                        }} color="light">Hide</IonButton> 
-                    </IonItem>
-                </div>
-                <IonLabel>Pull to refresh</IonLabel>
-                <IonIcon class="noConnectionArrowIcon" icon={chevronDownOutline}/>
-            </IonList>
-            </>
-        )
-    }
     sendMail(){
         const [openMail, setOpenMail] = useState(false);
         const options:any = ["Fault","Recommendation","About my bill"]
@@ -211,7 +154,7 @@ class Widgets{
             <IonList>
                 <IonButton color="light" onClick={()=>{
                     setOpenMail(true);
-                }}>SEnd Email +</IonButton>
+                }}>Send Email<BiMessageRoundedAdd style={{color:"dodgerblue",fontSize:"25px"}}/></IonButton>
 
                 <IonModal isOpen={openMail} onDidDismiss={()=>{setOpenMail(false)}}>
                     <IonList class="send-mail-container">

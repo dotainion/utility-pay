@@ -1,0 +1,102 @@
+.noConnectionContainer{
+    text-align: center;
+    width: 100%;
+    color: blue;
+    position: fixed;
+    z-index:2;
+    user-select: none;
+    --ion-background-color: white;
+    border-bottom: 1px solid lightgray;
+}
+.noConnectionImage{
+    width: 130px;
+    margin-left: 50%;
+    transform: translate(-50%);
+}
+.noConnectionAlert{
+    color: orange;
+}
+.noConnectionText{
+    text-align: center;
+    width: 100%;
+    color: red;
+}
+.noConnectionSubText{
+    font-size: 11px;
+}
+.noConnectionArrowIcon{
+    font-size: 30px;
+    color: blue;
+    margin-bottom: -10px;
+    display: none;
+}
+.noConnectionDetailButton{
+    width: 100%;
+    color: navy;
+    text-align: center;
+    text-decoration: underline;
+    transform: translate(60px);
+}
+.noConnectionDetailTextContainer{
+    width: 60%;
+    color: blue;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-left: 50%;
+    transform: translate(-50%);
+}
+.noConnectionDetailText{
+    text-align: justify;
+}
+.noConnectionDetailBtnHover:hover{
+    color: lightgray;
+}
+.noConnectionCloseXbutton{
+    width: 24px;
+    height: 24px;
+    color: white;
+    font-size: 25px;
+    border-radius: 50%;
+    background-color: red;  
+    margin-left: 96%; 
+    transform: translate(-50%); 
+}
+.noConnectionCloseButton{
+    width: 60px;
+    height: 25px;
+    text-transform: none;
+    margin-left: 52%;
+}
+.noConnectionCloseDisplayButton{
+    width: 60px;
+    height: 20px;
+}
+.noConnectionReferesher{
+    color: dodgerblue;
+    font-weight: bold;
+    text-align: center;
+}
+.noConnectionHover:hover{
+    background-color: gray; 
+}
+.noConnectionRetryBtn{
+    display: none;
+}
+.noConnectionRetryBtn2{
+    display: inline-block;
+    width: 80px;
+    padding: 5px;
+    border: 1px solid green;
+}
+
+@media screen and (max-width:767px){
+    .noConnectionArrowIcon{
+        display: inline-block;
+    }
+    .noConnectionRetryBtn{
+        display: inline-block;
+    }
+    .noConnectionRetryBtn2{
+        display: none;
+    }
+}

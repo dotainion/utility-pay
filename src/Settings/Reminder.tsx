@@ -9,6 +9,8 @@ import LOGO from '../Images/nawasa.jpeg';
 import testImg from '../Images/test.png';
 import auth from '../Authentication/Authenticate';
 import { appPages } from '../components/Config';
+import { ComingSoon } from '../components/ComingSoon';
+
 
 
 const Reminder = (data:any) => {
@@ -17,10 +19,7 @@ const Reminder = (data:any) => {
 
     return (
         <IonList hidden={HIDDEN}>
-            <div className="empty-info">
-                <div>{data.onOpen} is comming soon</div>
-                <img className="empty-image" src={testImg}/>
-            </div>
+            <ComingSoon name={data.onOpen}/>
         </IonList>
     );
 };
