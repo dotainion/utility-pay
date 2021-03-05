@@ -1,6 +1,6 @@
 {
     "appId": "com.nawasa.cam",
-    "appName": "Nawasa pay",
+    "appName": "Nawasa bill pay",
     "bundledWebRuntime": false,
     "npmClient": "npm",
     "webDir": "build",

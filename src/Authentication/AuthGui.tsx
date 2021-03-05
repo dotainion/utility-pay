@@ -99,7 +99,7 @@ export const LoginRegister: React.FC = () =>{
         setErrMsg("");
         setSuccessMsg("");
         tools.onClick.startLoader();
-        if (cmd == "login"){
+        if (cmd === "login"){
             onLoginSubmit(await userLogin.login.check(LOGIN_INPUTS,login_id_obj));
             //place save to database codes here
         }else if (cmd === "register"){
@@ -158,7 +158,7 @@ export const LoginRegister: React.FC = () =>{
                                 </IonItem>
 
                                 <IonList class="ERROR-CONTAINER">
-                                    <IonLabel>{errMsg}</IonLabel>
+                                    <IonLabel color="danger">{errMsg}</IonLabel>
                                     <IonLabel class="SUCCESS-MSG">{successMsg}</IonLabel>
                                 </IonList>
 
