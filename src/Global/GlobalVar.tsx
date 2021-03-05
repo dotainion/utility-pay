@@ -3,6 +3,7 @@
 class Routes{
     login = "/login";
     pagePath = "/page/:name";
+    downloads = "/download/app";
 }
 
 class Ids{

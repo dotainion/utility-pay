@@ -32,6 +32,7 @@ import Menu from './components/Menu';
 import MainPage from './Main/Main';
 import { globalVar } from './Global/GlobalVar';
 import Auth from './Auth';
+import Downloads from './downloads/download';
 
 
 const App: React.FC = () => {
@@ -49,6 +50,7 @@ const App: React.FC = () => {
           </IonRouterOutlet>
         </IonSplitPane>
         <Switch>
+          <Route path={globalVar.route.downloads} component={Downloads} exact />
           <Route path={globalVar.route.login} component={LoginRegisterRecover} exact />
           <Route component={App404} />
           <Redirect from="/" to={globalVar.route.login} exact />
